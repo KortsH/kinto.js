@@ -12,6 +12,34 @@ const { describe, it, beforeEach } = intern.getPlugin("interface.bdd");
 
 describe("batch module", () => {
   describe("aggregate()", () => {
+
+    // Test case for line 72
+
+    it("should add error response to errors list", () => {
+      const _requests = [
+        requests.createRequest("collections/abc/records/123", { data: { id: 1 } })
+      ];
+      const responses = [
+        {
+          status: 500,
+          body: { errno: 999, code: 500, error: "Internal Server Error" },
+          path: "collections/abc/records/123",
+          headers: {},
+        }
+      ];
+    
+      const result = aggregate(responses, _requests);
+      expect(result.errors).to.deep.equal([
+        {
+          path: "collections/abc/records/123",
+          sent: _requests[0],
+          error: responses[0].body,
+        }
+      ]);
+    });
+
+    // End of test case
+
     it("should throw if responses length doesn't match requests one", () => {
       const resp = {
         status: 200,
