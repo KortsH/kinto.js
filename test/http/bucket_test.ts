@@ -1072,6 +1072,13 @@ describe("Bucket", () => {
       );
     });
 
+    it("should throw if permissions is not an object", async () => {
+      await expectAsyncError(
+        () => getBlogBucket().setPermissions(undefined as any),
+        /A permissions object is required./
+      );
+    });
+
     it("should set permissions", () => {
       getBlogBucket().setPermissions(fakePermissions);
 
