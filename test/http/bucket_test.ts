@@ -425,6 +425,13 @@ describe("Bucket", () => {
         .returns(Promise.resolve({ data: {} }));
     });
 
+    it('should throw an error if the collection does not have an id', async () => {
+      await expectAsyncError(
+        () => getBlogBucket().deleteCollection({} as any),
+        /A collection id is required./
+      );
+    });
+
     it("should delete a collection", () => {
       getBlogBucket().deleteCollection("todelete");
 
