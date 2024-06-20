@@ -135,6 +135,28 @@ describe("KintoClient", () => {
     });
   });
 
+   /** @test {KintoClient#deleteBucket} */
+  describe("#deleteBucket", () => {
+    it("should throw an error if bucket ID is not provided", async () => {
+      try {
+        await api.deleteBucket("");
+      } catch (e) {
+        if (e instanceof Error) {
+          expect(e.message).to.eql("A bucket id is required.");
+        } else {
+          throw e;
+        }
+      }
+    });
+
+    it("should delete the bucket if ID is provided", async () => {
+      const fakeResponse = { deleted: true };
+      sandbox.stub(api, "execute").returns(Promise.resolve(fakeResponse));
+      const response = await api.deleteBucket("bucketId");
+      expect(response).to.eql(fakeResponse);
+    });
+  });
+
   /** @test {KintoClient#setHeaders} */
   describe("#setHeaders", () => {
     let client: KintoClient;
