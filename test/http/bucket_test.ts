@@ -95,6 +95,13 @@ describe("Bucket", () => {
         .returns(Promise.resolve({ data: 1 }));
     });
 
+    it("should throw if data is not an object", async () => {
+      await expectAsyncError(
+        () => getBlogBucket().setData(undefined as any),
+        /A bucket object is required./
+      );
+    });
+
     it("should set the bucket data", () => {
       getBlogBucket().setData({ a: 1 });
 
