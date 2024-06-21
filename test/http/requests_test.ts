@@ -6,6 +6,7 @@ intern.getPlugin("chai").should();
 const { describe, it } = intern.getPlugin("interface.bdd");
 
 describe("requests module", () => {
+
   describe("createRequest()", () => {
     it("should return a POST creation request", () => {
       expect(requests.createRequest("/foo", {})).eql({
@@ -194,6 +195,15 @@ describe("requests module", () => {
         .to.have.property("method")
         .eql("POST");
     });
+
+    // Test case for line 169
+
+    it("should handle gzipped query parameter correctly when set to null", () => {
+      const result = requests.addAttachmentRequest("/foo", dataURL, {}, { gzipped: null });
+      expect(result).to.have.property("path").eql("/foo");
+    });
+
+    // End of test case
 
     it("should accept a headers option", () => {
       expect(
