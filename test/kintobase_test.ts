@@ -6,7 +6,9 @@ import BaseAdapter from "../src/adapters/base";
 const { expect } = intern.getPlugin("chai");
 const { describe, it, beforeEach } = intern.getPlugin("interface.bdd");
 
-/** @test {KintoBase} */
+class KintoBaseWithoutApiClass extends KintoBase<any> {
+}
+
 describe("KintoBase", () => {
   describe("static properties", () => {
     describe("get adapters()", () => {
@@ -43,6 +45,23 @@ describe("KintoBase", () => {
         localFields: ["_myLocalField"],
       });
       expect(collection.localFields).eql(["_myLocalField"]);
+    });
+  });
+
+  describe("ApiClass getter", () => {
+    let kintoWithoutApiClass: KintoBaseWithoutApiClass;
+
+    beforeEach(() => {
+      kintoWithoutApiClass = new KintoBaseWithoutApiClass({
+        adapter: () => new KintoBase.adapters.BaseAdapter(),
+        events: new EventEmitter(),
+      });
+    });
+
+    it("should throw an error when ApiClass is not implemented", () => {
+      expect(() => {
+        kintoWithoutApiClass.api;
+      }).to.Throw(Error, "ApiClass() must be implemented by subclasses.");
     });
   });
 });
