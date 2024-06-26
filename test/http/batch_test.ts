@@ -12,6 +12,39 @@ const { describe, it, beforeEach } = intern.getPlugin("interface.bdd");
 
 describe("batch module", () => {
   describe("aggregate()", () => {
+
+    // Test case for line 72
+
+    it("should add to skipped with undefined id if path does not match regex", () => {
+      const _requests = [requests.createRequest("invalid/path/format", { data: { id: 1 } })];
+      const responses = [
+        { status: 404, body: { errno: 110, code: 404, error: "Not found" }, path: "invalid/path/format", headers: {} }
+      ];
+    
+      const result = aggregate(responses, _requests);
+      expect(result.skipped).to.deep.equal([
+        { id: undefined, path: "invalid/path/format", error: responses[0].body }
+      ]);
+    });
+    
+    // End of test case
+
+    // Additional test case for server errors (status code 500)
+
+    it("should add error response to errors list", () => {
+      const _requests = [requests.createRequest("collections/abc/records/123", { data: { id: 1 } })];
+      const responses = [
+        { status: 500, body: { errno: 999, code: 500, error: "Internal Server Error" }, path: "collections/abc/records/123", headers: {} }
+      ];
+    
+      const result = aggregate(responses, _requests);
+      expect(result.errors).to.deep.equal([
+        { path: "collections/abc/records/123", sent: _requests[0], error: responses[0].body }
+      ]);
+    });
+    
+    // End of test case
+
     it("should throw if responses length doesn't match requests one", () => {
       const resp = {
         status: 200,
