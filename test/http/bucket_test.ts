@@ -95,6 +95,13 @@ describe("Bucket", () => {
         .returns(Promise.resolve({ data: 1 }));
     });
 
+    it("should throw if data is not an object", async () => {
+      await expectAsyncError(
+        () => getBlogBucket().setData(undefined as any),
+        /A bucket object is required./
+      );
+    });
+
     it("should set the bucket data", () => {
       getBlogBucket().setData({ a: 1 });
 
@@ -416,6 +423,13 @@ describe("Bucket", () => {
       executeStub = sandbox
         .stub(client, "execute")
         .returns(Promise.resolve({ data: {} }));
+    });
+
+    it('should throw an error if the collection does not have an id', async () => {
+      await expectAsyncError(
+        () => getBlogBucket().deleteCollection({} as any),
+        /A collection id is required./
+      );
     });
 
     it("should delete a collection", () => {
@@ -1065,6 +1079,13 @@ describe("Bucket", () => {
       );
     });
 
+    it("should throw if permissions is not an object", async () => {
+      await expectAsyncError(
+        () => getBlogBucket().setPermissions(undefined as any),
+        /A permissions object is required./
+      );
+    });
+
     it("should set permissions", () => {
       getBlogBucket().setPermissions(fakePermissions);
 
@@ -1132,6 +1153,13 @@ describe("Bucket", () => {
           data: {},
           permissions: fakePermissions,
         })
+      );
+    });
+
+    it("should throw if permissions is not an object", async () => {
+      await expectAsyncError(
+        () => getBlogBucket().addPermissions(undefined as any),
+        /A permissions object is required./
       );
     });
 
