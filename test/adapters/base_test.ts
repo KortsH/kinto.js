@@ -27,5 +27,10 @@ describe("adapters.BaseAdapter", () => {
     expect(() => adapter.importBulk()).to.Throw(Error, "Not Implemented.");
     // @ts-ignore
     expect(() => adapter.loadDump()).to.Throw(Error, "Not Implemented.");
+    // New tests for saveMetadata and getMetadata
+    // @ts-ignore
+    expect(() => adapter.saveMetadata()).to.Throw(Error, "Not Implemented.");
+    // @ts-ignore
+    expect(() => adapter.getMetadata()).to.Throw(Error, "Not Implemented.");
   });
 });
