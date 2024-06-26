@@ -17,6 +17,8 @@ import {
   extractFileInfo,
   cleanUndefinedProperties,
   addEndpointOptions,
+  arrayEqual,
+  toDataBody,
 } from "../src/utils";
 import { expectAsyncError } from "./test_utils";
 
@@ -266,6 +268,44 @@ describe("Utils", () => {
     it("should return undefined for undefined properties", () => {
       expect(getDeepKey(record, "year")).to.equal(undefined);
       expect(getDeepKey(record, "publisher.name")).to.equal(undefined);
+    });
+  });
+
+  describe("arrayEqual", () => {
+    it("should return false if arrays have different lengths", () => {
+      expect(arrayEqual([1, 2], [1, 2, 3])).to.be.false;
+    });
+
+    it("should return false if arrays have same lengths but different elements", () => {
+      expect(arrayEqual([1, 2, 3], [1, 2, 4])).to.be.false;
+    });
+
+    it("should return true if arrays are equal", () => {
+      expect(arrayEqual([1, 2, 3], [1, 2, 3])).to.be.true;
+    });
+
+    it("should return true if arrays are empty", () => {
+      expect(arrayEqual([], [])).to.be.true;
+    });
+  });
+
+  describe("toDataBody", () => {
+    it("should return the same object if the resource is an object", () => {
+      const resource = { id: "123" };
+      expect(toDataBody(resource)).to.eql(resource);
+    });
+
+    it("should return an object with id if the resource is a string", () => {
+      const resource = "123";
+      expect(toDataBody(resource)).to.eql({ id: resource });
+    });
+
+    it("should throw an error for invalid argument", () => {
+      expect(() => toDataBody(123 as any)).to.throw(Error, "Invalid argument.");
+    });
+
+    it("should throw an error for undefined argument", () => {
+      expect(() => toDataBody(undefined as any)).to.throw(Error, "Invalid argument.");
     });
   });
 });
