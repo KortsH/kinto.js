@@ -6,6 +6,7 @@
 **URL**: <https://github.com/Kinto/kinto.js?tab=readme-ov-file>
 
 **Number of lines of code**: 16 882
+
 **The tool used to count the lines of code:** Lizard
 
 ![image](https://github.com/KortsH/kinto.js/assets/156069447/95d090fe-bfb4-4899-bc8b-718ca6668464)
