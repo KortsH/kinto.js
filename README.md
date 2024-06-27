@@ -41,7 +41,7 @@ await posts.sync();
 
 **Number of lines of code and the tool used to count it**: 16 882, tool: Lizard
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.001.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/95d090fe-bfb4-4899-bc8b-718ca6668464)
 
 **Programming language**: TypeScript
 
@@ -72,7 +72,8 @@ pip install kinto\_attachment // This line causes all tests to be run. Without i
 
 npm run test-cover
 
-![ref1]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/58476fae-7f25-4cc1-a401-b7b574feb9d0)
+
 
 **Our coverage tool**
 
@@ -223,14 +224,13 @@ This tool can be found on the branch of unique-IDs-and-branching. To use this to
 
 Coverage before:
 
-![ref2]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/10e7702c-66df-40a3-9b58-49330da7d0da)
 
 Coverage after:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.004.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/0899731b-f9a9-46c2-94c0-5ac73b4f6446)
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.005.png)
-
+![image](https://github.com/KortsH/kinto.js/assets/156069447/96c88b02-8840-4f2c-b7f6-5bade1eec269)
 
 **In the batch.ts tests we had the following improvements:**
 
@@ -254,11 +254,11 @@ Coverage after:
 
 All enhancements for this branch were done on the batch-testing-branch. It initially had 1448 passing tests, and following the addition of the two test cases increased coverage of line 72, and increased the passing tests to 1450. 
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.006.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/48421a00-c3f2-4472-96ec-bc773dcd04eb)
 
 The aggregate function which includes line 72 of batch.ts is placed beneath for reference:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.007.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/0e3f036a-61c6-4587-82b1-a5ff25818d8f)
 
 The aggregate function here is in charge of categorizing the batch requests based on their server responses. When categorizing them, there are 4 main groups. The first, if the error status is between 200 and 399, the requests are pushed into the published array. Second, if it is 404, it is it pushed into the skipped list. Third, if it is 412 it is pushed into the conflicts list, and finally if the error status is anything else, it is pushed into the errors array. Diving into the test itself, the test creates a request with a path that does not match the expected regex pattern and a corresponding response with a 404 status code. Following this, we call the aggregate function with this request and response, after which the test checks that the skipped array in the result contains an entry with an undefined ID, as the path does not match the regex. The test ensures that the code handling the 404 responses to the skipped array is executed by checking if the regex fails to match the request path, leading to an undefined ID.
 
@@ -266,7 +266,7 @@ In addition to this, although the number of covered lines did not increase, the 
 
 Here is the corresponding test case:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.008.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/0f7d9ba1-275e-47d3-8534-c26b971d5937)
 
 The reason why this function correctly deals with the server status errors is because there is no other test case that deals with these errors. The rest of the framework focuses on errors ranging between 200s and 400s, and when multiple 500s errors occur simultaneously yet not individually. Hence, adding a check for an individual 500 status code allows it to tackle more tests. Essentially, this test performs the same operations as the previous tests for 404 status codes, by creating a request and response and with a status code of 500. Following this, it invokes the aggregate function as well and then looks for the corresponding regex regarding the status code. 
 
@@ -281,11 +281,11 @@ The reason why this function correctly deals with the server status errors is be
 
 Coverage Before:
 
-![ref2]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/ad1cc9cb-759d-412a-b779-39e8a97c5b57)
 
 Coverage After:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.009.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/9a2bd2f4-c17e-43ea-b4eb-06797dd6b3ba)
 
 **In the requests.ts tests we had the following improvements:**
 
@@ -313,15 +313,15 @@ In the same fashion as the previous tests, the improvements for requests.ts was 
 
 The corresponding functions are the ones below:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.010.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/7ccf9b46-2810-47ee-a55e-4267af426358)
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.011.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/acdddcf6-7f18-497f-b0d5-be3fb4f917d5)
 
 For reference, lines 103-110 and line 169 are included beneath from the requests.ts file:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.012.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/0eac6ad0-eb24-41ca-aa65-9919aabd614f)
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.013.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/752c8e3b-e0d3-4e32-8b36-14e025a45386)
 
 Out of the two test cases, the test case for line 169 is a lot more simpler. When analyzing line 169, its functionality comes down to correctly appending to the custom request path the result of the ternary operator. Therefore, this functionality can be easily tested by adding a test case checking if the result of the ternary operator is correctly added to the path. In our test, we used an edge value (null) and checked if nothing is added. 
 
@@ -334,10 +334,12 @@ Diving into lines 103-109, within the jsonPatchPermissionsRequest function, thes
 **Link**: <https://github.com/KortsH/kinto.js/commit/3992f912f6b4c3be6a4c51ad9d723761a5d35f8b>
 
 Coverage before:
-![ref1]
+
+![image](https://github.com/KortsH/kinto.js/assets/156069447/b41b0ef7-99f9-4a0a-b1ef-187050d23b34)
 
 Coverage after:
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.014.png)
+
+![image](https://github.com/KortsH/kinto.js/assets/156069447/7128ce25-a23f-45d4-8b75-0b91b428932d)
 
 **In the KintoBase.ts tests we had the following improvements:**
 
@@ -377,10 +379,12 @@ The testing approach included the following steps:
 **Link:** <https://github.com/KortsH/kinto.js/commit/3f720b82b4edaa9363ce1d2ec87ffce5a76f0abd>
 
 Coverage before:
-![ref3]
+
+![image](https://github.com/KortsH/kinto.js/assets/156069447/be140ac6-b98d-460d-a6d9-6a610ca31a55)
 
 Coverage after:
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.016.png)
+
+![image](https://github.com/KortsH/kinto.js/assets/156069447/ae208a18-0169-40bf-845a-0bed5b9162f3)
 
 In the utils.ts tests we had the following improvements:
 
@@ -423,11 +427,11 @@ The testing approach included the following steps:
 
 Coverage before:
 
-![ref1]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/01fbb3f0-638d-4c2e-a5f0-6a298dcff784)
 
 Coverage after:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.017.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/83bac9e5-9cfa-41a5-af57-c9feaab64450)
 
 **In the base.ts (from adapters) tests we had the following improvements:**
 
@@ -463,12 +467,12 @@ A test was added to call the *getMetadata* method. This triggers the throw new E
 **Link:** <https://github.com/Kinto/kinto.js/commit/e3c57e1ba4dba7e22a155005dad1ceb7510aa794>
 
 Coverage before:
-![ref1]
 
+![image](https://github.com/KortsH/kinto.js/assets/156069447/85a02b06-9bf1-4755-a86f-bd614cec3b6a)
 
 Coverage after:
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.018.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/9f5a639a-3c45-4be4-8996-a375f62fc4e7)
 
 **In the base.ts (from http) tests we had the following improvements:**
 
@@ -502,11 +506,11 @@ Method name: *deleteCollection*
 
 **Coverage before:**
 
-![ref2]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/b7274eba-fc63-484f-b2cf-905019fd4adc)
 
 **Coverage after:**
 
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.019.png)
+![image](https://github.com/KortsH/kinto.js/assets/156069447/1cb34001-037f-4759-a24d-dc80c2c63b0d)
 
 ***In the bucket.ts (from adapters) tests, we had the following improvements:***
 
@@ -547,10 +551,11 @@ Method name: *addPermissions*
 
 **Coverage before:**
 
-![ref2]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/6e6645c6-768b-4d4a-bf52-872592e1a1fc)
 
-**Coverage after:![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.020.png)**
+**Coverage after:**
 
+![image](https://github.com/KortsH/kinto.js/assets/156069447/f4748a81-5f96-4556-83ef-be40dc9a5425)
 
 ***In the bucket.ts (from adapters) tests, we had the following improvements:***
 
@@ -578,10 +583,11 @@ A test was added to verify the error handling for each function. For each test, 
 
 **Old coverage results:**
 
-![ref1]
+![image](https://github.com/KortsH/kinto.js/assets/156069447/ea9761d9-7b7b-4e5c-b509-1ba2ea0032a8)
 
 **New coverage results (all tests together):**
-![](Aspose.Words.24677b30-d03a-44e8-a371-b7372ef35f7e.021.png)
+
+![image](https://github.com/KortsH/kinto.js/assets/156069447/0b30accb-482d-485b-bd53-045dffa10f8c)
 
 ## <a name="_la6k60own7ly"></a>**Statement of individual contributions**
 
