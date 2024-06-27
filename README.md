@@ -39,7 +39,8 @@ await posts.sync();
 
 **URL**: <https://github.com/Kinto/kinto.js?tab=readme-ov-file>
 
-**Number of lines of code and the tool used to count it**: 16 882, tool: Lizard
+**Number of lines of code**: 16 882
+**The tool used to count the lines of code:** Lizard
 
 ![image](https://github.com/KortsH/kinto.js/assets/156069447/95d090fe-bfb4-4899-bc8b-718ca6668464)
 
@@ -48,6 +49,7 @@ await posts.sync();
 ## <a name="_7sgym325bj2t"></a>**Coverage measurement**
 
 **Existing tool:** Npm test
+
 **Documentation: <https://kintojs.readthedocs.io/en/latest/contributing/>**
 
 **How to run:** Using the documentation stated above, after setting up the virtual environment and activating bin, we used npm test cover to obtain the coverage of kinto.js. The commands are stated below:
@@ -234,13 +236,13 @@ Coverage after:
 
 **In the batch.ts tests we had the following improvements:**
 
-**Statements coverage improvement:** 100% to 100%
+Statements coverage improvement: 100% to 100%
 
-**Branches coverage improvement:** 84.21% to 89.47%
+Branches coverage improvement: 84.21% to 89.47%
 
-**Functions coverage improvement:** 100% to 100%
+Functions coverage improvement: 100% to 100%
 
-**Lines coverage improvement:** 100% to 100%
+Lines coverage improvement: 100% to 100%
 
 **The tests were implemented for the following methods and properties:**
 
@@ -289,13 +291,13 @@ Coverage After:
 
 **In the requests.ts tests we had the following improvements:**
 
-**Statements coverage improvement:** 100% to 100%
+Statements coverage improvement: 100% to 100%
 
-**Branches coverage improvement:** 90.9% to 96.96%
+Branches coverage improvement: 90.9% to 96.96%
 
-**Functions coverage improvement:** 100% to 100%
+Functions coverage improvement: 100% to 100%
 
-**Lines coverage improvement:** 100% to 100%
+Lines coverage improvement: 100% to 100%
 
 **The tests were implemented for the following methods and properties:**
 
@@ -351,7 +353,7 @@ Functions coverage improvement: 83.33 % to 100%
 
 Lines coverage improvement: 95.83% to 100%
 
-The tests were implemented for the following methods and properties:
+**The tests were implemented for the following methods and properties:**
 
 - The static adapters property of the *KintoBase* class.
 - The *localFields* property of a collection instance.
@@ -386,17 +388,17 @@ Coverage after:
 
 ![image](https://github.com/KortsH/kinto.js/assets/156069447/ae208a18-0169-40bf-845a-0bed5b9162f3)
 
-In the utils.ts tests we had the following improvements:
+**In the utils.ts tests we had the following improvements:**
 
-**Statements coverage improvement:** 99.04% to 100%
+Statements coverage improvement: 99.04% to 100%
 
-**Branches coverage improvement:** 97.08% to 99.2%
+Branches coverage improvement: 97.08% to 99.2%
 
-**Functions coverage improvement:** 100% to 100%
+Functions coverage improvement: 100% to 100%
 
-**Lines coverage improvement:** 99% to 100%
+Lines coverage improvement: 99% to 100%
 
-The tests were implemented for the following methods:
+**The tests were implemented for the following methods:**
 
 - arrayEqual
 - toDataBody
@@ -443,7 +445,9 @@ Functions coverage improvement: 80.00 % to 100%
 
 Lines coverage improvement: 83.33% to 100%
 
-The new tests were implemented specifically for the *saveMetadata* and *getaMetadata* methods. 
+**The new tests were implemented for the following methods:**
+- saveMetadata
+- getMetadata
 
 *saveMetadata: This method is intended to save metadata associated with the database. It should store the provided metadata and return the saved metadata or nul*l.
 
@@ -484,7 +488,8 @@ Functions coverage improvement: 100% to 100%
 
 Lines coverage improvement: 98.69% to 99.34%
 
-The new tests were implemented specifically for the *deleteBucket* method.
+**The tests were implemented for the following method:**
+- deleteBucket
 
 *deleteBucket: This method is intended to delete a bucket from the server. It should validate that a bucket ID is provided and throw an error if it is not. When a valid bucket ID is provided, it should proceed to delete the bucket and return the response.*
 
