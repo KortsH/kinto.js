@@ -70,7 +70,7 @@ npm install intern --save-dev
 
 source ./venv/bin/activate
 
-pip install kinto\_attachment // This line causes all tests to be run. Without it, around 400 lines are not executed
+pip install kinto\_attachment
 
 npm run test-cover
 
